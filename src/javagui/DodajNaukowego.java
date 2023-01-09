@@ -6,7 +6,7 @@ package javagui;
 
 import Hierarchia.Pracownik.PracownikNaukowy;
 import Interfejsy.DoComboBoxa;
-import Interfejsy.Edycja;
+import StrategieEdycji.Edycja;
 import Interfejsy.Obserwator;
 import StrategieEdycji.*;
 import Interfejsy.Obiekt;
@@ -32,14 +32,13 @@ public class DodajNaukowego extends javax.swing.JFrame implements Obiekt {
     }
     private int OmegaIndex;
     private Edycja sposobEdycji=null;
-    private Object obiekt;
     private Object[] dane= new Object[7];
     private ArrayList<Obserwator> obw=new ArrayList<Obserwator>();
 
     @Override
     public void notifyObservers() {
         for (int i = 0; i < obw.size(); i++) {
-            obw.get(i).update(sposobEdycji,obiekt, OmegaIndex);
+            obw.get(i).update(sposobEdycji,dane, PracownikNaukowy.class,OmegaIndex);
         }
     }
 
@@ -308,7 +307,6 @@ public class DodajNaukowego extends javax.swing.JFrame implements Obiekt {
         }
         else{sposobEdycji=new Dodawanie();}
 
-        obiekt= createClass.create(dane, PracownikNaukowy.class);
         notifyObservers();
 
         this.dispose();
@@ -323,7 +321,6 @@ public class DodajNaukowego extends javax.swing.JFrame implements Obiekt {
     }//GEN-LAST:event_DorobekActionPerformed
 
     private void UsunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsunActionPerformed
-        obiekt= createClass.create(dane, PracownikNaukowy.class);
         sposobEdycji= new Usuwanie();
         notifyObservers();
         this.dispose();

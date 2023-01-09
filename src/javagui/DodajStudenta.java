@@ -11,7 +11,7 @@ import Hierarchia.Student.Student;
 import Hierarchia.Student.StudentDzienny;
 import Hierarchia.Student.StudentZaoczny;
 import Interfejsy.DoComboBoxa;
-import Interfejsy.Edycja;
+import StrategieEdycji.Edycja;
 import Main.*;
 import Interfejsy.Obiekt;
 import Interfejsy.Obserwator;
@@ -56,16 +56,17 @@ private ArrayList<Kurs>kursy=new ArrayList<>();
         }
 
     }
+
     private int OmegaIndex;
     private Edycja sposobEdycji=null;
-    private Object obiekt= null;
     private Object[] dane= new Object[7];
     private ArrayList<Obserwator> obw=new ArrayList<Obserwator>();
+    private Class klasa=StudentZaoczny.class;
 
     @Override
     public void notifyObservers() {
         for (int i = 0; i < obw.size(); i++) {
-            obw.get(i).update(sposobEdycji,obiekt, OmegaIndex);
+            obw.get(i).update(sposobEdycji,dane,klasa, OmegaIndex);
         }
     }
 
@@ -402,15 +403,14 @@ private ArrayList<Kurs>kursy=new ArrayList<>();
         }
         else{sposobEdycji=new Dodawanie();}
     if (Czydzienny.isSelected())
-        obiekt= createClass.create(dane,StudentDzienny.class);
-    else{obiekt= createClass.create(dane, StudentZaoczny.class);}
+        klasa= StudentDzienny.class;
+    else{klasa=StudentZaoczny.class;}
         notifyObservers();
 
         this.dispose();
     }
 
     private void UsunActionPerformed(java.awt.event.ActionEvent evt) {
-        obiekt= createClass.create(dane, Osoba.class);
         sposobEdycji= new Usuwanie();
         notifyObservers();
         this.dispose();

@@ -6,7 +6,7 @@ package javagui;
 
 import Hierarchia.ObiektyAgregowane.Kierunek;
 import Hierarchia.ObiektyAgregowane.Wydzial;
-import Interfejsy.Edycja;
+import StrategieEdycji.Edycja;
 import Main.*;
 import Interfejsy.Obiekt;
 import Interfejsy.Obserwator;
@@ -35,7 +35,6 @@ public class DodajWydzial extends javax.swing.JFrame implements Obiekt, MessageL
     }
     private ArrayList<Obserwator> obw=new ArrayList<Obserwator>();
     private Edycja sposobEdycji=null;
-    private Object obiekt;
     private Object[] dane= new Object[2];
     private int row=-1;
     private ArrayList<Kierunek> kierunki=new ArrayList<Kierunek>();
@@ -53,7 +52,7 @@ public class DodajWydzial extends javax.swing.JFrame implements Obiekt, MessageL
     @Override
     public void notifyObservers() {
         for (int i = 0; i < obw.size(); i++) {
-            obw.get(i).update(sposobEdycji,obiekt, row);
+            obw.get(i).update(sposobEdycji,dane,Wydzial.class, row);
         }
 
     }
@@ -229,7 +228,6 @@ public class DodajWydzial extends javax.swing.JFrame implements Obiekt, MessageL
         }
         else{sposobEdycji=new Dodawanie();}
 
-        obiekt= createClass.create(dane, Wydzial.class);
         notifyObservers();
 
         this.dispose(); // TODO add your handling code here:
@@ -239,14 +237,9 @@ public class DodajWydzial extends javax.swing.JFrame implements Obiekt, MessageL
         DodajKierunek Okienkone =new DodajKierunek(kierunki,DodajWydzial.this);
        Okienkone.setVisible(true);
        Okienkone.Usun.setVisible(false);
-//        int index=TabelaKursy.getSelectedRow();
-//        System.out.print(index);
-//        TabelaKursy.clearSelection();        // TODO add your handling code here:
     }//GEN-LAST:event_DodajKierunekActionPerformed
 
     private void UsunActionPerformed(java.awt.event.ActionEvent evt) {
-        //GEN-FIRST:event_UsunActionPerformed
-        obiekt= createClass.create(dane, Wydzial.class);
         sposobEdycji= new Usuwanie();
         notifyObservers();
         this.dispose(); // TODO add your handling code here:

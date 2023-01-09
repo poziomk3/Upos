@@ -4,14 +4,14 @@ import Hierarchia.ObiektyAgregowane.Kurs;
 import Hierarchia.ObiektyAgregowane.StanowiskoPracy;
 import Hierarchia.ObiektyAgregowane.Wydzial;
 import Hierarchia.Osoba;
-import Interfejsy.Edycja;
 
 import java.util.ArrayList;
 
 public class Dodawanie implements Edycja {
 
     @Override
-    public ArrayList<?> opercja(ArrayList<?> ArrayList, Object obiekt, int wiersz) {
+    public ArrayList<?> opercja(ArrayList<?> ArrayList, Object [] dane, Class klasa,int wiersz) {
+        Object obiekt=Main.createClass.create(dane,klasa);
         System.out.println("DODANO");
         ArrayList<Osoba> os=new ArrayList<Osoba>();
         if (ArrayList.getClass()==os.getClass()&& obiekt instanceof Osoba ) {

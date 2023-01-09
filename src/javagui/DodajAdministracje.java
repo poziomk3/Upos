@@ -6,7 +6,7 @@ package javagui;
 
 import Hierarchia.Pracownik.PracownikAdministracyjny;
 import Interfejsy.DoComboBoxa;
-import Interfejsy.Edycja;
+import StrategieEdycji.Edycja;
 import Main.*;
 import Main.funkcjonalnosc;
 import Interfejsy.Obiekt;
@@ -41,7 +41,7 @@ public class DodajAdministracje extends javax.swing.JFrame implements Obiekt {
     @Override
     public void notifyObservers() {
         for (int i = 0; i < obw.size(); i++) {
-            obw.get(i).update(sposobEdycji,obiekt, OmegaIndex);
+            obw.get(i).update(sposobEdycji,dane,PracownikAdministracyjny.class, OmegaIndex);
         }
     }
 
@@ -302,7 +302,7 @@ public class DodajAdministracje extends javax.swing.JFrame implements Obiekt {
         }
         else{sposobEdycji=new Dodawanie();}
 
-        obiekt= createClass.create(dane, PracownikAdministracyjny.class);
+;
         notifyObservers();
 
         this.dispose();
@@ -315,7 +315,7 @@ public class DodajAdministracje extends javax.swing.JFrame implements Obiekt {
 
     private void UsunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsunActionPerformed
        //Usun
-        obiekt= createClass.create(dane, PracownikAdministracyjny.class);
+
         sposobEdycji= new Usuwanie();
         notifyObservers();
         this.dispose();

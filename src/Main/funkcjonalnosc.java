@@ -101,11 +101,11 @@ public static String[] comboBox(ArrayList<DoComboBoxa> nazwy){
         return returnFormat(wynik);
     }
 
-    public static Object[][] returnFormat( ArrayList< Object[]> wynik) {
+    public static <T> Object[][] returnFormat( ArrayList< T> wynik) {
         Object[][] result= new Object[wynik.size()][];
 
         for (int i = 0; i < wynik.size(); i++)
-            result[i] = wynik.get(i);
+            result[i] = (Object[]) wynik.get(i);
 
         return result;
     }

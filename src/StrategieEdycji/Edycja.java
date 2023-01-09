@@ -1,4 +1,4 @@
-package Interfejsy;
+package StrategieEdycji;
 
 import Hierarchia.ObiektyAgregowane.Kurs;
 import Hierarchia.ObiektyAgregowane.StanowiskoPracy;
@@ -8,6 +8,6 @@ import Hierarchia.Osoba;
 import java.util.ArrayList;
 
 public interface Edycja {
-    public ArrayList<?> opercja(ArrayList<?> ArrayList, Object obiekt, int wiersz);
+    public ArrayList<?> opercja(ArrayList<?> ArrayList, Object [] dane, Class klasa,int wiersz);
 
 }

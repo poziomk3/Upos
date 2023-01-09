@@ -1,10 +1,10 @@
 package Main;
 
-import Interfejsy.Edycja;
+import StrategieEdycji.Edycja;
 import Interfejsy.Obserwator;
 
 import java.util.ArrayList;
-import Main.Main;
+
 public class ObserwowanaLista implements Obserwator {
     private ArrayList<?> lista;
 
@@ -13,8 +13,8 @@ public class ObserwowanaLista implements Obserwator {
         this.lista = lista;
     }
 
-    public void update(Edycja Edycja, Object obiekt, int wiersz){
-        lista=Edycja.opercja(lista,obiekt,wiersz);
+    public void update(Edycja Edycja, Object [] dane, Class klasa,int wiersz){
+        lista=Edycja.opercja(lista,dane,klasa,wiersz);
         Main.Glowne.refreshData();
     }
 
