@@ -14,7 +14,7 @@ public class ObserwowanaLista implements Obserwator {
     }
 
     public void update(Edycja Edycja, Object [] dane, Class klasa,int wiersz){
-        lista=Edycja.opercja(lista,dane,klasa,wiersz);
+        lista=Edycja.operacja(lista,dane,klasa,wiersz);
         Main.Glowne.refreshData();
     }
 

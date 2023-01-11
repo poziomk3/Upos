@@ -10,9 +10,11 @@ import java.util.ArrayList;
 public class Dodawanie implements Edycja {
 
     @Override
-    public ArrayList<?> opercja(ArrayList<?> ArrayList, Object [] dane, Class klasa,int wiersz) {
+    public ArrayList<?> operacja(ArrayList<?> ArrayList, Object [] dane, Class klasa, int wiersz) {
         Object obiekt=Main.createClass.create(dane,klasa);
-        System.out.println("DODANO");
+        if (obiekt == null) {
+            return ArrayList;
+        }
         ArrayList<Osoba> os=new ArrayList<Osoba>();
         if (ArrayList.getClass()==os.getClass()&& obiekt instanceof Osoba ) {
             os=(ArrayList<Osoba>)ArrayList;

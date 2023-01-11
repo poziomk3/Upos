@@ -38,31 +38,38 @@ public static String[] comboBox(ArrayList<DoComboBoxa> nazwy){
 
     public static Object[][] zapelnijTabeleStudentow(ArrayList<Osoba> baza) {
         ArrayList< Object[]> wynik=new ArrayList<Object[]>() ;
+        if (baza==null)
+            return null;
 
         for (int i = 0; i < baza.size(); i++)
             if (baza.get(i) instanceof Student)
                 wynik.add(new Object[]{i, baza.get(i).getImie(), baza.get(i).getNazwisko(), baza.get(i).getPesel(), ((Student) baza.get(i)).getNrIneksu()});
-
+        if (wynik.size()==0){
+            return null;}
 
         return returnFormat(wynik);
     }
     public static Object[][] zapelnijTabeleAdministracji(ArrayList<Osoba> baza) {
         ArrayList< Object[]> wynik=new ArrayList<Object[]>() ;
-
+        if (baza==null)
+            return null;
         for (int i = 0; i < baza.size(); i++)
             if (baza.get(i) instanceof PracownikAdministracyjny)
                 wynik.add(new Object[]{i, baza.get(i).getImie(), baza.get(i).getNazwisko(), baza.get(i).getPesel(), ((PracownikAdministracyjny) baza.get(i)).getNrPracownika(), ((PracownikAdministracyjny) baza.get(i)).getStanowisko().getNazwa()});
-
+        if (wynik.size()==0){
+            return null;}
 
         return returnFormat(wynik);
     }
     public static Object[][] zapelnijTabeleNaukowa(ArrayList<Osoba> baza) {
         ArrayList< Object[]> wynik=new ArrayList<Object[]>() ;
-
+        if (baza==null)
+            return null;
         for (int i = 0; i < baza.size(); i++)
             if (baza.get(i) instanceof PracownikNaukowy)
                 wynik.add(new Object[]{i, baza.get(i).getImie(), baza.get(i).getNazwisko(), baza.get(i).getPesel(), ((PracownikNaukowy) baza.get(i)).getNrPracownika(), ((PracownikNaukowy) baza.get(i)).getWydzial().getNazwa()});
-
+        if (wynik.size()==0){
+            return null;}
         return returnFormat(wynik);
     }
     public static Object[][] zapelnijKursy(ArrayList<Kurs> kursy) {
