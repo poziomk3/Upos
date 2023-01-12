@@ -4,12 +4,11 @@ import Hierarchia.ObiektyAgregowane.Kierunek;
 import Hierarchia.ObiektyAgregowane.Kurs;
 import Hierarchia.ObiektyAgregowane.StanowiskoPracy;
 import Hierarchia.ObiektyAgregowane.Wydzial;
-import Hierarchia.Osoba;
 import Hierarchia.Pracownik.PracownikAdministracyjny;
 import Hierarchia.Pracownik.PracownikNaukowy;
 import Hierarchia.Student.StudentDzienny;
 import Hierarchia.Student.StudentZaoczny;
-import Main.Main;
+
 import java.util.ArrayList;
 
 public class createClass {

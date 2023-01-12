@@ -9,7 +9,7 @@ import StrategieEdycji.Edycja;
 import Interfejsy.Obiekt;
 import Interfejsy.Obserwator;
 import StrategieEdycji.*;
-import Main.*;
+
 import java.util.ArrayList;
 
 public class DodajStanowisko extends javax.swing.JFrame implements Obiekt {
@@ -20,8 +20,8 @@ public class DodajStanowisko extends javax.swing.JFrame implements Obiekt {
 
     public void setRow(int row) {
         this.row = row;
-        if (Main.stanowiska.getLista().get(row)instanceof StanowiskoPracy){
-        Nazwa.setText(((StanowiskoPracy) Main.stanowiska.getLista().get(row)).getNazwa());
+        if (Program.stanowiska.getLista().get(row)instanceof StanowiskoPracy){
+        Nazwa.setText(((StanowiskoPracy) Program.stanowiska.getLista().get(row)).getNazwa());
         }
     }
 

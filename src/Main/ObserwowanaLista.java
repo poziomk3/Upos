@@ -2,6 +2,7 @@ package Main;
 
 import StrategieEdycji.Edycja;
 import Interfejsy.Obserwator;
+import javagui.Program;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class ObserwowanaLista implements Obserwator {
 
     public void update(Edycja Edycja, Object [] dane, Class klasa,int wiersz){
         lista=Edycja.operacja(lista,dane,klasa,wiersz);
-        Main.Glowne.refreshData();
+        Program.Glowne.refreshData();
     }
 
     public ArrayList<?> getLista() {

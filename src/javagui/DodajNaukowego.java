@@ -11,7 +11,7 @@ import Interfejsy.Obserwator;
 import StrategieEdycji.*;
 import Interfejsy.Obiekt;
 import java.util.ArrayList;
-import Main.*;
+
 import Main.funkcjonalnosc;
 
 /**
@@ -21,13 +21,13 @@ import Main.funkcjonalnosc;
 public class DodajNaukowego extends javax.swing.JFrame implements Obiekt {
     public void setOmegaIndex(int omegaIndex) {
         OmegaIndex = omegaIndex;
-        Imie.setText(((PracownikNaukowy) Main.osoby.getLista().get(OmegaIndex)).getImie());
-        Nazwisko.setText(((PracownikNaukowy) Main.osoby.getLista().get(OmegaIndex)).getNazwisko());
-        Pesel.setText(((PracownikNaukowy) Main.osoby.getLista().get(OmegaIndex)).getPesel());
-        NrPracownika.setText(((PracownikNaukowy) Main.osoby.getLista().get(OmegaIndex)).getNrPracownika());
-        Dorobek.setText(String.valueOf(((PracownikNaukowy) Main.osoby.getLista().get(OmegaIndex)).getDorobek()));
-        Wydzial.setSelectedItem(((PracownikNaukowy) Main.osoby.getLista().get(OmegaIndex)).getWydzial().getNazwa());
-        DniWolne.setText(String.valueOf(((PracownikNaukowy) Main.osoby.getLista().get(OmegaIndex)).getDniWolne()));
+        Imie.setText(((PracownikNaukowy) Program.osoby.getLista().get(OmegaIndex)).getImie());
+        Nazwisko.setText(((PracownikNaukowy) Program.osoby.getLista().get(OmegaIndex)).getNazwisko());
+        Pesel.setText(((PracownikNaukowy) Program.osoby.getLista().get(OmegaIndex)).getPesel());
+        NrPracownika.setText(((PracownikNaukowy) Program.osoby.getLista().get(OmegaIndex)).getNrPracownika());
+        Dorobek.setText(String.valueOf(((PracownikNaukowy) Program.osoby.getLista().get(OmegaIndex)).getDorobek()));
+        Wydzial.setSelectedItem(((PracownikNaukowy) Program.osoby.getLista().get(OmegaIndex)).getWydzial().getNazwa());
+        DniWolne.setText(String.valueOf(((PracownikNaukowy) Program.osoby.getLista().get(OmegaIndex)).getDniWolne()));
 
     }
     private int OmegaIndex;
@@ -51,7 +51,7 @@ public class DodajNaukowego extends javax.swing.JFrame implements Obiekt {
      */
     public DodajNaukowego() {
         initComponents();
-        Wydzial.setModel(new javax.swing.DefaultComboBoxModel<>(funkcjonalnosc.comboBox((ArrayList<DoComboBoxa>) Main.wydzialy.getLista())));
+        Wydzial.setModel(new javax.swing.DefaultComboBoxModel<>(funkcjonalnosc.comboBox((ArrayList<DoComboBoxa>) Program.wydzialy.getLista())));
     }
 
     /**
@@ -301,7 +301,7 @@ public class DodajNaukowego extends javax.swing.JFrame implements Obiekt {
     }//GEN-LAST:event_ImieActionPerformed
 
     private void ZapiszActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZapiszActionPerformed
-        dane= new Object[]{Imie.getText(),Nazwisko.getText(),Pesel.getText(),NrPracownika.getText(),DniWolne.getText(),Main.wydzialy.getLista().get(Wydzial.getSelectedIndex()),Dorobek.getText()};
+        dane= new Object[]{Imie.getText(),Nazwisko.getText(),Pesel.getText(),NrPracownika.getText(),DniWolne.getText(), Program.wydzialy.getLista().get(Wydzial.getSelectedIndex()),Dorobek.getText()};
         if (Usun.isVisible()) {
             sposobEdycji=new Nadpisywanie();
         }

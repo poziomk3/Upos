@@ -7,7 +7,6 @@ package javagui;
 import Hierarchia.ObiektyAgregowane.Kierunek;
 import Hierarchia.ObiektyAgregowane.Wydzial;
 import StrategieEdycji.Edycja;
-import Main.*;
 import Interfejsy.Obiekt;
 import Interfejsy.Obserwator;
 import Interfejsy.MessageListener;
@@ -41,9 +40,9 @@ public class DodajWydzial extends javax.swing.JFrame implements Obiekt, MessageL
 
     public void setRow(int row) {
         this.row = row;
-        if (Main.wydzialy.getLista().get(row)instanceof Wydzial){
-            Nazwa.setText(((Wydzial) Main.wydzialy.getLista().get(row)).getNazwa());
-            kierunki=((Wydzial) Main.wydzialy.getLista().get(row)).getKierunki();
+        if (Program.wydzialy.getLista().get(row)instanceof Wydzial){
+            Nazwa.setText(((Wydzial) Program.wydzialy.getLista().get(row)).getNazwa());
+            kierunki=((Wydzial) Program.wydzialy.getLista().get(row)).getKierunki();
             refreshData();
         }
     }

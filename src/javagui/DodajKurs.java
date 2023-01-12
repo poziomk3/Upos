@@ -12,7 +12,7 @@ import Main.funkcjonalnosc;
 import Interfejsy.Obiekt;
 import Interfejsy.Obserwator;
 import StrategieEdycji.*;
-import Main.*;
+
 import java.util.ArrayList;
 
 /**
@@ -27,19 +27,19 @@ public class DodajKurs extends javax.swing.JFrame implements Obiekt {
     private int row=-1;
 
     public void refreshData(){
-        if(Main.wydzialy.getLista().get(Wydzial.getSelectedIndex())instanceof Wydzial) {
-            Kierunek.setModel(new javax.swing.DefaultComboBoxModel<>(funkcjonalnosc.comboBoxK( ((Hierarchia.ObiektyAgregowane.Wydzial) Main.wydzialy.getLista().get(Wydzial.getSelectedIndex())).getKierunki())));
+        if(Program.wydzialy.getLista().get(Wydzial.getSelectedIndex())instanceof Wydzial) {
+            Kierunek.setModel(new javax.swing.DefaultComboBoxModel<>(funkcjonalnosc.comboBoxK( ((Hierarchia.ObiektyAgregowane.Wydzial) Program.wydzialy.getLista().get(Wydzial.getSelectedIndex())).getKierunki())));
         }
 
     }
     public void setRow(int row) {
         this.row = row;
-        if (Main.kursy.getLista().get(row)instanceof Kurs){
-            Nazwa.setText(((Kurs) Main.kursy.getLista().get(row)).getNazwa());
-            ECts.setText(String.valueOf(((Kurs) Main.kursy.getLista().get(row)).getECTS()));
-            semestr.setText(String.valueOf(((Kurs) Main.kursy.getLista().get(row)).getSemestr()));
-            Wydzial.setSelectedItem(((Kurs) Main.kursy.getLista().get(row)).getWydzial().getNazwa());
-            Kierunek.setSelectedItem(((Kurs) Main.kursy.getLista().get(row)).getKierunek().getNazwa());
+        if (Program.kursy.getLista().get(row)instanceof Kurs){
+            Nazwa.setText(((Kurs) Program.kursy.getLista().get(row)).getNazwa());
+            ECts.setText(String.valueOf(((Kurs) Program.kursy.getLista().get(row)).getECTS()));
+            semestr.setText(String.valueOf(((Kurs) Program.kursy.getLista().get(row)).getSemestr()));
+            Wydzial.setSelectedItem(((Kurs) Program.kursy.getLista().get(row)).getWydzial().getNazwa());
+            Kierunek.setSelectedItem(((Kurs) Program.kursy.getLista().get(row)).getKierunek().getNazwa());
         }
     }
     @Override
@@ -58,7 +58,7 @@ public class DodajKurs extends javax.swing.JFrame implements Obiekt {
      */
     public DodajKurs() {
         initComponents();
-        Wydzial.setModel(new javax.swing.DefaultComboBoxModel<>(funkcjonalnosc.comboBox((ArrayList<DoComboBoxa>) Main.wydzialy.getLista())));
+        Wydzial.setModel(new javax.swing.DefaultComboBoxModel<>(funkcjonalnosc.comboBox((ArrayList<DoComboBoxa>) Program.wydzialy.getLista())));
         this.refreshData();
 
     }
@@ -265,7 +265,7 @@ public class DodajKurs extends javax.swing.JFrame implements Obiekt {
     }//GEN-LAST:event_NazwaActionPerformed
 
     private void ZapiszActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZapiszActionPerformed
-        dane= new Object[]{Nazwa.getText(), (ECts.getText()),(semestr.getText()),Main.wydzialy.getLista().get(Wydzial.getSelectedIndex()),Kierunek.getSelectedIndex()};
+        dane= new Object[]{Nazwa.getText(), (ECts.getText()),(semestr.getText()), Program.wydzialy.getLista().get(Wydzial.getSelectedIndex()),Kierunek.getSelectedIndex()};
         if (Usun.isVisible()==true) {
             sposobEdycji=new Nadpisywanie();
         }

@@ -4,7 +4,6 @@ import Hierarchia.ObiektyAgregowane.Kurs;
 import Hierarchia.ObiektyAgregowane.StanowiskoPracy;
 import Hierarchia.ObiektyAgregowane.Wydzial;
 import Hierarchia.Osoba;
-import Main.Main;
 import Main.funkcjonalnosc;
 import java.util.ArrayList;
 
@@ -20,7 +19,7 @@ public class MainMenu extends javax.swing.JFrame {
     public void refreshData() {
 
         TabelaStudentow.setModel(new javax.swing.table.DefaultTableModel(
-                funkcjonalnosc.zapelnijTabeleStudentow((ArrayList<Osoba>) Main.osoby.getLista()),
+                funkcjonalnosc.zapelnijTabeleStudentow((ArrayList<Osoba>) Program.osoby.getLista()),
                 new String[]{
                         "INDEKS OGOLNY", "IMIE", "NAZWISKO", "PESEL", "NR INDEKSU"}
         ) {
@@ -30,7 +29,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         TabelaNaukowi.setModel(new javax.swing.table.DefaultTableModel(
-                funkcjonalnosc.zapelnijTabeleNaukowa((ArrayList<Osoba>) Main.osoby.getLista()),
+                funkcjonalnosc.zapelnijTabeleNaukowa((ArrayList<Osoba>) Program.osoby.getLista()),
                 new String[]{
                         "INDEKS OGOLNY", "IMIE", "NAZWISKO", "PESEL", "NR PRACOWNIKA", "WYDZIAL",
                 }
@@ -42,7 +41,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         TabelaAdministracji.setModel(new javax.swing.table.DefaultTableModel(
 
-                funkcjonalnosc.zapelnijTabeleAdministracji((ArrayList<Osoba>) Main.osoby.getLista()),
+                funkcjonalnosc.zapelnijTabeleAdministracji((ArrayList<Osoba>) Program.osoby.getLista()),
                 new String[]{
                         "INDEKS OGOLNY", "IMIE", "NAZWISKO", "PESEL", "NR PRACOWNIKA", "STANOWISKO",
                 }
@@ -53,7 +52,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         TabelaStanowiska.setModel(new javax.swing.table.DefaultTableModel(
-                funkcjonalnosc.zapelnijStanowiska((ArrayList<StanowiskoPracy>) Main.stanowiska.getLista()),
+                funkcjonalnosc.zapelnijStanowiska((ArrayList<StanowiskoPracy>) Program.stanowiska.getLista()),
                 new String[]{
                         "NAZWA"
                 }
@@ -64,7 +63,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         TabelaKursy.setModel(new javax.swing.table.DefaultTableModel(
-                funkcjonalnosc.zapelnijKursy((ArrayList<Kurs>) Main.kursy.getLista()),
+                funkcjonalnosc.zapelnijKursy((ArrayList<Kurs>) Program.kursy.getLista()),
                 new String[]{
                         "NAZWA", "ECTS", "SEMESTR", "KIERUNEK"
                 }
@@ -75,7 +74,7 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         TabelaWydzialy.setModel(new javax.swing.table.DefaultTableModel(
-                funkcjonalnosc.zapelnijWydzialy((ArrayList<Wydzial>) Main.wydzialy.getLista()),
+                funkcjonalnosc.zapelnijWydzialy((ArrayList<Wydzial>) Program.wydzialy.getLista()),
                 new String[]{
                         "NAZWA", "LICZBA KIERUNKOW"
                 }
@@ -537,46 +536,46 @@ public class MainMenu extends javax.swing.JFrame {
         DodajKurs Okienkone = new DodajKurs();
         Okienkone.setVisible(true);
         Okienkone.Usun.setVisible(false);
-        Okienkone.addObserver(Main.kursy);
+        Okienkone.addObserver(Program.kursy);
 
     }
     private void DodajStudentaPrzycisk(java.awt.event.ActionEvent evt) {
         DodajStudenta Okienkone = new DodajStudenta(TabelaKursy);
         Okienkone.setVisible(true);
         Okienkone.Usun.setVisible(false);
-        Okienkone.addObserver(Main.osoby);
+        Okienkone.addObserver(Program.osoby);
     }
     private void DodajNaukowegoPrzycisk(java.awt.event.ActionEvent evt) {
         DodajNaukowego Okienkone = new DodajNaukowego();
         Okienkone.setVisible(true);
         Okienkone.Usun.setVisible(false);
-        Okienkone.addObserver(Main.osoby);
+        Okienkone.addObserver(Program.osoby);
     }
     private void DodajAdministracjePrzycisk(java.awt.event.ActionEvent evt) {
         DodajAdministracje Okienkone = new DodajAdministracje();
         Okienkone.setVisible(true);
         Okienkone.Usun.setVisible(false);
-        Okienkone.addObserver(Main.osoby);
+        Okienkone.addObserver(Program.osoby);
     }
     private void DodajStanowiskoPrzycisk(java.awt.event.ActionEvent evt) {
         DodajStanowisko Okienkone = new DodajStanowisko();
         Okienkone.setVisible(true);
         Okienkone.Usun.setVisible(false);
-        Okienkone.addObserver(Main.stanowiska);
+        Okienkone.addObserver(Program.stanowiska);
 
     }
     private void DodajWydzialPrzycisk(java.awt.event.ActionEvent evt) {
         DodajWydzial Okienkone = new DodajWydzial();
         Okienkone.setVisible(true);
         Okienkone.Usun.setVisible(false);
-        Okienkone.addObserver(Main.wydzialy);
+        Okienkone.addObserver(Program.wydzialy);
 
     }
     private void TabelaKursyMousePressed(java.awt.event.MouseEvent evt) {
         DodajKurs Okienkone = new DodajKurs();
         Okienkone.setRow(TabelaKursy.getSelectedRow());
         Okienkone.setVisible(true);
-        Okienkone.addObserver(Main.kursy);
+        Okienkone.addObserver(Program.kursy);
 
     }
     private void TabelaStudentowMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaStudentowMousePressed
@@ -584,39 +583,39 @@ public class MainMenu extends javax.swing.JFrame {
         DodajStudenta Okienkone = new DodajStudenta(TabelaKursy);
         Okienkone.setVisible(true);
         Okienkone.setOmegaIndex((Integer) TabelaStudentow.getValueAt(TabelaStudentow.getSelectedRow(), 0));
-        Okienkone.addObserver(Main.osoby);
+        Okienkone.addObserver(Program.osoby);
 
     }
     private void TabelaStanowiskaMousePressed(java.awt.event.MouseEvent evt) {
         DodajStanowisko Okienkone = new DodajStanowisko();
         Okienkone.setRow(TabelaStanowiska.getSelectedRow());
         Okienkone.setVisible(true);
-        Okienkone.addObserver(Main.stanowiska);
+        Okienkone.addObserver(Program.stanowiska);
     }
     private void TabelaWydzialyMousePressed(java.awt.event.MouseEvent evt) {
         DodajWydzial Okienkone = new DodajWydzial();
         Okienkone.setRow(TabelaWydzialy.getSelectedRow());
         Okienkone.setVisible(true);
-        Okienkone.addObserver(Main.wydzialy);
+        Okienkone.addObserver(Program.wydzialy);
     }
     private void TabelaAdministracjiMousePressed(java.awt.event.MouseEvent evt) {
         DodajAdministracje Okienkone = new DodajAdministracje();
         Okienkone.setVisible(true);
-        Okienkone.addObserver(Main.osoby);
+        Okienkone.addObserver(Program.osoby);
         Okienkone.setOmegaIndex((Integer) TabelaAdministracji.getValueAt(TabelaAdministracji.getSelectedRow(), 0));
     }
     private void TabelaNaukowiMousePressed(java.awt.event.MouseEvent evt) {
 
         DodajNaukowego Okienkone = new DodajNaukowego();
         Okienkone.setVisible(true);
-        Okienkone.addObserver(Main.osoby);
+        Okienkone.addObserver(Program.osoby);
         Okienkone.setOmegaIndex((Integer) TabelaNaukowi.getValueAt(TabelaNaukowi.getSelectedRow(), 0));
     }
     private void formWindowClosing(java.awt.event.WindowEvent evt) {
-        funkcjonalnosc.serializowanie("src/files/Osoby.ser", Main.osoby.getLista());
-        funkcjonalnosc.serializowanie("src/files/Kursy.ser", Main.kursy.getLista());
-        funkcjonalnosc.serializowanie("src/files/Wydzialy.ser", Main.wydzialy.getLista());
-        funkcjonalnosc.serializowanie("src/files/Stanowiska.ser", Main.stanowiska.getLista());
+        funkcjonalnosc.serializowanie("src/files/Osoby.ser", Program.osoby.getLista());
+        funkcjonalnosc.serializowanie("src/files/Kursy.ser", Program.kursy.getLista());
+        funkcjonalnosc.serializowanie("src/files/Wydzialy.ser", Program.wydzialy.getLista());
+        funkcjonalnosc.serializowanie("src/files/Stanowiska.ser", Program.stanowiska.getLista());
         System.out.println("SERIALIZOWANIE");
 
     }
