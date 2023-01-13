@@ -28,7 +28,7 @@ public class DodajNaukowego extends javax.swing.JFrame implements Obiekt {
         Dorobek.setText(String.valueOf(((PracownikNaukowy) Program.osoby.getLista().get(OmegaIndex)).getDorobek()));
         Wydzial.setSelectedItem(((PracownikNaukowy) Program.osoby.getLista().get(OmegaIndex)).getWydzial().getNazwa());
         DniWolne.setText(String.valueOf(((PracownikNaukowy) Program.osoby.getLista().get(OmegaIndex)).getDniWolne()));
-
+        Pesel.setEditable(false);
     }
     private int OmegaIndex;
     private Edycja sposobEdycji=null;

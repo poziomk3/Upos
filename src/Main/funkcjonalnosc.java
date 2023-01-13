@@ -9,12 +9,23 @@ import Hierarchia.Pracownik.PracownikAdministracyjny;
 import Hierarchia.Pracownik.PracownikNaukowy;
 import Hierarchia.Student.Student;
 import Interfejsy.DoComboBoxa;
+import javagui.Program;
 
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class funkcjonalnosc {
+    public static int znajdzIndex(String PESEL,ArrayList<Osoba> os){
+        for (int i = 0; i < os.size();i++) {
+            if (os.get(i).getPesel().equals(PESEL)) {
+                return i;
+            }
+
+        }
+        return -1;
+    }
 
 public static String[] comboBox(ArrayList<DoComboBoxa> nazwy){
     ArrayList<String> result= new ArrayList<>();
@@ -60,6 +71,10 @@ public static String[] comboBox(ArrayList<DoComboBoxa> nazwy){
             return null;}
 
         return returnFormat(wynik);
+    }
+    public static int getRandomNumberUsingNextInt(int min, int max) {
+        Random random = new Random();
+        return random.nextInt(max - min) + min;
     }
     public static Object[][] zapelnijTabeleNaukowa(ArrayList<Osoba> baza) {
         ArrayList< Object[]> wynik=new ArrayList<Object[]>() ;

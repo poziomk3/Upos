@@ -4,7 +4,7 @@ import Hierarchia.ObiektyAgregowane.Kierunek;
 import Hierarchia.ObiektyAgregowane.Kurs;
 import Hierarchia.ObiektyAgregowane.Wydzial;
 import Hierarchia.Osoba;
-
+import static Main.funkcjonalnosc.getRandomNumberUsingNextInt;
 import java.util.ArrayList;
 
 public abstract class Student extends Osoba {
@@ -25,7 +25,13 @@ public abstract class Student extends Osoba {
         this.kursyStudenta = kursyStudenta;
     }
 
-
+    public Student(String imie, String nazwisko, String pesel, String nrIneksu,Wydzial wydzial) {
+        super(imie, nazwisko, pesel);
+        this.nrIneksu = nrIneksu;
+        this.wydzial =wydzial;
+        this.kierunek=wydzial.getKierunki().get(getRandomNumberUsingNextInt(0,wydzial.getKierunki().size()));
+        this.kursyStudenta=new ArrayList<>();
+    }
 
     public Wydzial getWydzial() {
         return wydzial;

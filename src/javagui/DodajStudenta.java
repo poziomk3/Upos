@@ -52,7 +52,7 @@ public class DodajStudenta extends javax.swing.JFrame implements Obiekt {
         if(((Student) Program.osoby.getLista().get(OmegaIndex)).getClass()== StudentDzienny.class){
     Czydzienny.setSelected(true);
         }
-
+        Pesel.setEditable(false);
     }
     private ArrayList<Kurs>kursy=new ArrayList<>();
     private int OmegaIndex;

@@ -4,6 +4,9 @@ import Hierarchia.ObiektyAgregowane.Kurs;
 import Hierarchia.ObiektyAgregowane.StanowiskoPracy;
 import Hierarchia.ObiektyAgregowane.Wydzial;
 import Hierarchia.Osoba;
+import Main.WyjatekElementuzBazy;
+import javagui.Program;
+import javagui.SprawdzeniePriorytetu;
 
 import java.util.ArrayList;
 
@@ -14,32 +17,50 @@ public class Nadpisywanie implements Edycja {
         if (obiekt == null) {
             return ArrayList;
         }
-        ArrayList<Osoba> os=new ArrayList<Osoba>();
-        if (ArrayList.getClass()==os.getClass()&& obiekt instanceof Osoba ) {
+        ArrayList<Osoba> os;
+        if ( obiekt instanceof Osoba ) {
             os=(ArrayList<Osoba>)ArrayList;
             os.set(wiersz, (Osoba) obiekt);
             return os;
         }
 
-        ArrayList<Kurs> kursy=new ArrayList<Kurs>();
-        if (ArrayList.getClass()==os.getClass()&& obiekt instanceof Kurs ) {
+        ArrayList<Kurs> kursy;
+        if ( obiekt instanceof Kurs ) {
             kursy=(ArrayList<Kurs>)ArrayList;
             kursy.set(wiersz, (Kurs) obiekt);
             return kursy;
         }
 
 
-        ArrayList<StanowiskoPracy> stanowiska=new ArrayList<StanowiskoPracy>();
-        if (ArrayList.getClass()==os.getClass()&& obiekt instanceof StanowiskoPracy ) {
-            stanowiska=(ArrayList<StanowiskoPracy>)ArrayList;
-            stanowiska.set(wiersz, (StanowiskoPracy) obiekt);
+        ArrayList<StanowiskoPracy> stanowiska;
+        if (obiekt instanceof StanowiskoPracy ) {
+
+                stanowiska = (ArrayList<StanowiskoPracy>) ArrayList;
+                try {
+                    if(!stanowiska.get(wiersz).getNazwa().equals(((StanowiskoPracy) obiekt).getNazwa()))
+                        SprawdzeniePriorytetu.czyMoznaZmienicStanowisko(stanowiska.get(wiersz));
+
+                    stanowiska.set(wiersz, (StanowiskoPracy) obiekt);
+                } catch (WyjatekElementuzBazy e) {
+                    Program.Glowne.alert("BLAD EDYTOWANIA!");
+                }
+
+
+
             return stanowiska;
         }
 
-        ArrayList<Wydzial> wydzialy=new ArrayList<Wydzial>();
-        if (ArrayList.getClass()==os.getClass()&& obiekt instanceof Wydzial ) {
+        ArrayList<Wydzial> wydzialy;
+        if (obiekt instanceof Wydzial ) {
             wydzialy=(ArrayList<Wydzial>)ArrayList;
-            wydzialy.set(wiersz, (Wydzial) obiekt);
+            try {
+                if(!wydzialy.get(wiersz).getNazwa().equals(((Wydzial) obiekt).getNazwa()))
+                    SprawdzeniePriorytetu.czyMoznaZmienicWydzial(wydzialy.get(wiersz));
+
+                wydzialy.set(wiersz, (Wydzial) obiekt);
+            } catch (WyjatekElementuzBazy e) {
+                Program.Glowne.alert("BLAD EDYTOWANIA!");
+            }
             return wydzialy;
         }
         return null;

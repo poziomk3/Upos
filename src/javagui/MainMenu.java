@@ -5,10 +5,29 @@ import Hierarchia.ObiektyAgregowane.StanowiskoPracy;
 import Hierarchia.ObiektyAgregowane.Wydzial;
 import Hierarchia.Osoba;
 import Main.funkcjonalnosc;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainMenu extends javax.swing.JFrame {
+
+
+
+    private void WOPCJIActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void WyszukajPesActionPerformed(java.awt.event.ActionEvent evt) {
+        new WpiszPesel().setVisible(true);
+    }
+    public void alert(String message){
+        JOptionPane.showMessageDialog(this, message);
+    }
     public MainMenu() {
         initComponents();
         this.refreshData();
@@ -84,12 +103,22 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        RowSorter<TableModel> sorter1 = new TableRowSorter<TableModel>(TabelaNaukowi.getModel());
+        RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(TabelaStudentow.getModel());
+        RowSorter<TableModel> sorter2 = new TableRowSorter<TableModel>(TabelaAdministracji.getModel());
+        TabelaStudentow.setRowSorter(sorter);
+
+        TabelaNaukowi.setRowSorter(sorter1);
+
+        TabelaAdministracji.setRowSorter(sorter2);
     }
+
 
 //
 //    @SuppressWarnings("unchecked")
     private void initComponents() {
-
+        WOPCJI = new javax.swing.JMenu();
+        WyszukajPes = new javax.swing.JMenuItem();
         CardPanelPrzeg = new javax.swing.JPanel();
         PanelPrzegOs = new javax.swing.JPanel();
         PanelPrzegStudentow = new javax.swing.JPanel();
@@ -129,6 +158,8 @@ public class MainMenu extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -493,7 +524,27 @@ public class MainMenu extends javax.swing.JFrame {
         });
         MenuDodaj.add(jMenuItem4);
 
+
         MenuGorne.add(MenuDodaj);
+
+        WOPCJI.setText("Wiecej opcji");
+        WOPCJI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WOPCJIActionPerformed(evt);
+            }
+        });
+
+        WyszukajPes.setText("Wyszukaj po PESEL");
+        WyszukajPes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WyszukajPesActionPerformed(evt);
+            }
+        });
+        WOPCJI.add(WyszukajPes);
+
+
+        MenuGorne.add(WOPCJI);
+
 
         setJMenuBar(MenuGorne);
 
@@ -661,5 +712,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JMenu WOPCJI;
+    private javax.swing.JMenuItem WyszukajPes;
 
 }

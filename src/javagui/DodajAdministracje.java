@@ -34,7 +34,7 @@ public class DodajAdministracje extends javax.swing.JFrame implements Obiekt {
         NrPracownika.setText(((PracownikAdministracyjny) Program.osoby.getLista().get(OmegaIndex)).getNrPracownika());
         DniWolne.setText(String.valueOf(((PracownikAdministracyjny) Program.osoby.getLista().get(OmegaIndex)).getDniWolne()));
         _stanowisko.setSelectedItem(((PracownikAdministracyjny) Program.osoby.getLista().get(OmegaIndex)).getStanowisko().getNazwa());
-
+        Pesel.setEditable(false);
     }
 
     @Override
