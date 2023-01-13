@@ -6,8 +6,7 @@ package javagui;
 
 import Hierarchia.Pracownik.PracownikAdministracyjny;
 import Interfejsy.DoComboBoxa;
-import Interfejsy.Edycja;
-import Main.*;
+import StrategieEdycji.Edycja;
 import Main.funkcjonalnosc;
 import Interfejsy.Obiekt;
 import Interfejsy.Obserwator;
@@ -29,19 +28,19 @@ public class DodajAdministracje extends javax.swing.JFrame implements Obiekt {
 
     public void setOmegaIndex(int omegaIndex) {
         OmegaIndex = omegaIndex;
-        Imie.setText(((PracownikAdministracyjny) Main.osoby.getLista().get(OmegaIndex)).getImie());
-        Nazwisko.setText(((PracownikAdministracyjny) Main.osoby.getLista().get(OmegaIndex)).getNazwisko());
-        Pesel.setText(((PracownikAdministracyjny) Main.osoby.getLista().get(OmegaIndex)).getPesel());
-        NrPracownika.setText(((PracownikAdministracyjny) Main.osoby.getLista().get(OmegaIndex)).getNrPracownika());
-        DniWolne.setText(String.valueOf(((PracownikAdministracyjny) Main.osoby.getLista().get(OmegaIndex)).getDniWolne()));
-        _stanowisko.setSelectedItem(((PracownikAdministracyjny) Main.osoby.getLista().get(OmegaIndex)).getStanowisko().getNazwa());
-
+        Imie.setText(((PracownikAdministracyjny) Program.osoby.getLista().get(OmegaIndex)).getImie());
+        Nazwisko.setText(((PracownikAdministracyjny) Program.osoby.getLista().get(OmegaIndex)).getNazwisko());
+        Pesel.setText(((PracownikAdministracyjny) Program.osoby.getLista().get(OmegaIndex)).getPesel());
+        NrPracownika.setText(((PracownikAdministracyjny) Program.osoby.getLista().get(OmegaIndex)).getNrPracownika());
+        DniWolne.setText(String.valueOf(((PracownikAdministracyjny) Program.osoby.getLista().get(OmegaIndex)).getDniWolne()));
+        _stanowisko.setSelectedItem(((PracownikAdministracyjny) Program.osoby.getLista().get(OmegaIndex)).getStanowisko().getNazwa());
+        Pesel.setEditable(false);
     }
 
     @Override
     public void notifyObservers() {
         for (int i = 0; i < obw.size(); i++) {
-            obw.get(i).update(sposobEdycji,obiekt, OmegaIndex);
+            obw.get(i).update(sposobEdycji,dane,PracownikAdministracyjny.class, OmegaIndex);
         }
     }
 
@@ -51,7 +50,7 @@ public class DodajAdministracje extends javax.swing.JFrame implements Obiekt {
     }
     public void refreshData(){
 
-        _stanowisko.setModel(new javax.swing.DefaultComboBoxModel<>(funkcjonalnosc.comboBox((ArrayList<DoComboBoxa>) Main.stanowiska.getLista())));
+        _stanowisko.setModel(new javax.swing.DefaultComboBoxModel<>(funkcjonalnosc.comboBox((ArrayList<DoComboBoxa>) Program.stanowiska.getLista())));
 
     }
 
@@ -111,7 +110,6 @@ public class DodajAdministracje extends javax.swing.JFrame implements Obiekt {
             }
         });
 
-        Imie.setText("Imie");
         Imie.setEnabled(true);
         Imie.setPreferredSize(new java.awt.Dimension(90, 500));
         Imie.addActionListener(new java.awt.event.ActionListener() {
@@ -296,13 +294,13 @@ public class DodajAdministracje extends javax.swing.JFrame implements Obiekt {
 
     private void ZapiszActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ZapiszActionPerformed
        //ZAPISZ
-        dane= new Object[]{Imie.getText(),Nazwisko.getText(),Pesel.getText(),NrPracownika.getText(),DniWolne.getText(),Main.stanowiska.getLista().get(_stanowisko.getSelectedIndex())};
+        dane= new Object[]{Imie.getText(),Nazwisko.getText(),Pesel.getText(),NrPracownika.getText(),DniWolne.getText(), Program.stanowiska.getLista().get(_stanowisko.getSelectedIndex())};
         if (Usun.isVisible()) {
             sposobEdycji=new Nadpisywanie();
         }
         else{sposobEdycji=new Dodawanie();}
 
-        obiekt= createClass.create(dane, PracownikAdministracyjny.class);
+;
         notifyObservers();
 
         this.dispose();
@@ -315,7 +313,7 @@ public class DodajAdministracje extends javax.swing.JFrame implements Obiekt {
 
     private void UsunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsunActionPerformed
        //Usun
-        obiekt= createClass.create(dane, PracownikAdministracyjny.class);
+
         sposobEdycji= new Usuwanie();
         notifyObservers();
         this.dispose();

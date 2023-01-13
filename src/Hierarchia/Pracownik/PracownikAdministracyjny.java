@@ -5,6 +5,11 @@ import Hierarchia.ObiektyAgregowane.StanowiskoPracy;
 public class PracownikAdministracyjny extends Pracownik{
     private StanowiskoPracy stanowisko;
 
+    public PracownikAdministracyjny(String imie, String nazwisko, String pesel, String nrPracownika,StanowiskoPracy stanowisko) {
+        super(imie, nazwisko, pesel, nrPracownika);
+        this.stanowisko = stanowisko;
+    }
+
     public PracownikAdministracyjny(String imie, String nazwisko, String pesel, String nrPracownika, int dniWolne, StanowiskoPracy stanowisko) {
         super(imie, nazwisko, pesel, nrPracownika, dniWolne);
         this.stanowisko = stanowisko;

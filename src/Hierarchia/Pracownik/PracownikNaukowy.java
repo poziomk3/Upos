@@ -12,6 +12,11 @@ public class PracownikNaukowy extends Pracownik{
         this.dorobek = dorobek;
     }
 
+    public PracownikNaukowy(String imie, String nazwisko, String pesel, String nrPracownika,Wydzial wydzial) {
+        super(imie, nazwisko, pesel, nrPracownika);
+        this.wydzial=wydzial;
+    }
+
 
     public void setWydzial(Wydzial wydzial) {
         this.wydzial = wydzial;

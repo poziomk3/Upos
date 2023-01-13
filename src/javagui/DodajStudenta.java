@@ -6,13 +6,11 @@ package javagui;
 
 import Hierarchia.ObiektyAgregowane.Kurs;
 import Hierarchia.ObiektyAgregowane.Wydzial;
-import Hierarchia.Osoba;
 import Hierarchia.Student.Student;
 import Hierarchia.Student.StudentDzienny;
 import Hierarchia.Student.StudentZaoczny;
 import Interfejsy.DoComboBoxa;
-import Interfejsy.Edycja;
-import Main.*;
+import StrategieEdycji.Edycja;
 import Interfejsy.Obiekt;
 import Interfejsy.Obserwator;
 import StrategieEdycji.*;
@@ -28,44 +26,45 @@ import Main.funkcjonalnosc;
  */
 public class DodajStudenta extends javax.swing.JFrame implements Obiekt {
 
-private ArrayList<Kurs>kursy=new ArrayList<>();
+
     public void refreshData(){
-        if(Main.wydzialy.getLista().get(Wydzial.getSelectedIndex())instanceof Wydzial) {
-            Kierunek.setModel(new javax.swing.DefaultComboBoxModel<>(funkcjonalnosc.comboBoxK( ((Hierarchia.ObiektyAgregowane.Wydzial) Main.wydzialy.getLista().get(Wydzial.getSelectedIndex())).getKierunki())));
+        if(Program.wydzialy.getLista().get(Wydzial.getSelectedIndex())instanceof Wydzial) {
+            Kierunek.setModel(new javax.swing.DefaultComboBoxModel<>(funkcjonalnosc.comboBoxK( ((Hierarchia.ObiektyAgregowane.Wydzial) Program.wydzialy.getLista().get(Wydzial.getSelectedIndex())).getKierunki())));
         }
 
     }
     public void setOmegaIndex(int omegaIndex) {
         OmegaIndex = omegaIndex;
-        kursy=((Student) Main.osoby.getLista().get(OmegaIndex)).getKursyStudenta();
-        Imie.setText(((Student) Main.osoby.getLista().get(OmegaIndex)).getImie());
-        Nazwisko.setText(((Student) Main.osoby.getLista().get(OmegaIndex)).getNazwisko());
-        Pesel.setText(((Student) Main.osoby.getLista().get(OmegaIndex)).getPesel());
-        Nr_indeks.setText(((Student) Main.osoby.getLista().get(OmegaIndex)).getNrIneksu().substring(1));
-        OplataZaKursy.setText(String.valueOf(((Student) Main.osoby.getLista().get(OmegaIndex)).getOplataZaKursy()));
-        Wydzial.setSelectedItem(((Student) Main.osoby.getLista().get(OmegaIndex)).getWydzial().getNazwa());
-        Kierunek.setSelectedItem(String.valueOf(((Student) Main.osoby.getLista().get(OmegaIndex)).getKierunek()));
+        kursy=((Student) Program.osoby.getLista().get(OmegaIndex)).getKursyStudenta();
+        Imie.setText(((Student) Program.osoby.getLista().get(OmegaIndex)).getImie());
+        Nazwisko.setText(((Student) Program.osoby.getLista().get(OmegaIndex)).getNazwisko());
+        Pesel.setText(((Student) Program.osoby.getLista().get(OmegaIndex)).getPesel());
+        Nr_indeks.setText(((Student) Program.osoby.getLista().get(OmegaIndex)).getNrIneksu().substring(1));
+        OplataZaKursy.setText(String.valueOf(((Student) Program.osoby.getLista().get(OmegaIndex)).getOplataZaKursy()));
+        Wydzial.setSelectedItem(((Student) Program.osoby.getLista().get(OmegaIndex)).getWydzial().getNazwa());
+        Kierunek.setSelectedItem(String.valueOf(((Student) Program.osoby.getLista().get(OmegaIndex)).getKierunek()));
         WybraneKursy.setModel(new javax.swing.table.DefaultTableModel(
-               funkcjonalnosc.zapelnijKursy (((Student) Main.osoby.getLista().get(OmegaIndex)).getKursyStudenta()),
+               funkcjonalnosc.zapelnijKursy (((Student) Program.osoby.getLista().get(OmegaIndex)).getKursyStudenta()),
                 new String [] {
                         "NAZWA", "ECTS", "SEMESTR", "KIERUNEK"
                 }
         ));
-        if(((Student) Main.osoby.getLista().get(OmegaIndex)).getClass()== StudentDzienny.class){
+        if(((Student) Program.osoby.getLista().get(OmegaIndex)).getClass()== StudentDzienny.class){
     Czydzienny.setSelected(true);
         }
-
+        Pesel.setEditable(false);
     }
+    private ArrayList<Kurs>kursy=new ArrayList<>();
     private int OmegaIndex;
     private Edycja sposobEdycji=null;
-    private Object obiekt= null;
     private Object[] dane= new Object[7];
     private ArrayList<Obserwator> obw=new ArrayList<Obserwator>();
+    private Class klasa=StudentZaoczny.class;
 
     @Override
     public void notifyObservers() {
         for (int i = 0; i < obw.size(); i++) {
-            obw.get(i).update(sposobEdycji,obiekt, OmegaIndex);
+            obw.get(i).update(sposobEdycji,dane,klasa, OmegaIndex);
         }
     }
 
@@ -73,9 +72,7 @@ private ArrayList<Kurs>kursy=new ArrayList<>();
     public void addObserver(Obserwator observer) {
         obw.add(observer);
     }
-    /**
-     * Creates new form DodajStudenta
-     */
+
     public DodajStudenta(JTable tKursy) {
         initComponents();
 //
@@ -86,15 +83,11 @@ private ArrayList<Kurs>kursy=new ArrayList<>();
                         "NAZWA", "ECTS", "SEMESTR", "KIERUNEK"
                 }
         ));
-        Wydzial.setModel(new javax.swing.DefaultComboBoxModel<>(funkcjonalnosc.comboBox((ArrayList<DoComboBoxa>) Main.wydzialy.getLista())));
+        Wydzial.setModel(new javax.swing.DefaultComboBoxModel<>(funkcjonalnosc.comboBox((ArrayList<DoComboBoxa>) Program.wydzialy.getLista())));
         this.refreshData();
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
@@ -396,21 +389,20 @@ private ArrayList<Kurs>kursy=new ArrayList<>();
     }
 
     private void ZapiszActionPerformed(java.awt.event.ActionEvent evt) {
-        dane=new Object[]{Imie.getText(),Nazwisko.getText(),Pesel.getText(),Nr_indeks.getText(),Main.wydzialy.getLista().get(Wydzial.getSelectedIndex()),Kierunek.getSelectedIndex(),OplataZaKursy.getText(),kursy};
+        dane=new Object[]{Imie.getText(),Nazwisko.getText(),Pesel.getText(),Nr_indeks.getText(), Program.wydzialy.getLista().get(Wydzial.getSelectedIndex()),Kierunek.getSelectedIndex(),OplataZaKursy.getText(),kursy};
         if (Usun.isVisible()) {
             sposobEdycji=new Nadpisywanie();
         }
         else{sposobEdycji=new Dodawanie();}
     if (Czydzienny.isSelected())
-        obiekt= createClass.create(dane,StudentDzienny.class);
-    else{obiekt= createClass.create(dane, StudentZaoczny.class);}
+        klasa= StudentDzienny.class;
+    else{klasa=StudentZaoczny.class;}
         notifyObservers();
 
         this.dispose();
     }
 
     private void UsunActionPerformed(java.awt.event.ActionEvent evt) {
-        obiekt= createClass.create(dane, Osoba.class);
         sposobEdycji= new Usuwanie();
         notifyObservers();
         this.dispose();
@@ -422,7 +414,7 @@ private ArrayList<Kurs>kursy=new ArrayList<>();
 
     private void TabelaKursyMousePressed(java.awt.event.MouseEvent evt) {
         int row=TabelaKursy.getSelectedRow();
-        kursy.add((Kurs) Main.kursy.getLista().get(row));
+        kursy.add((Kurs) Program.kursy.getLista().get(row));
         Object[] essa=new Object[4];
         for (int j = 0; j < TabelaKursy.getColumnCount(); j++) {
             essa[j]=TabelaKursy.getValueAt(row,j);

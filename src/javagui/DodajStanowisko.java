@@ -5,24 +5,23 @@
 package javagui;
 
 import Hierarchia.ObiektyAgregowane.StanowiskoPracy;
-import Interfejsy.Edycja;
+import StrategieEdycji.Edycja;
 import Interfejsy.Obiekt;
 import Interfejsy.Obserwator;
 import StrategieEdycji.*;
-import Main.*;
+
 import java.util.ArrayList;
 
 public class DodajStanowisko extends javax.swing.JFrame implements Obiekt {
     private ArrayList<Obserwator>  obw=new ArrayList<Obserwator>();
     private Edycja sposobEdycji=null;
-    private Object obiekt;
     private Object[] dane= new Object[1];
     private int row=-1;
 
     public void setRow(int row) {
         this.row = row;
-        if (Main.stanowiska.getLista().get(row)instanceof StanowiskoPracy){
-        Nazwa.setText(((StanowiskoPracy) Main.stanowiska.getLista().get(row)).getNazwa());
+        if (Program.stanowiska.getLista().get(row)instanceof StanowiskoPracy){
+        Nazwa.setText(((StanowiskoPracy) Program.stanowiska.getLista().get(row)).getNazwa());
         }
     }
 
@@ -30,7 +29,7 @@ public class DodajStanowisko extends javax.swing.JFrame implements Obiekt {
     @Override
     public void notifyObservers() {
         for (int i = 0; i < obw.size(); i++) {
-            obw.get(i).update(sposobEdycji,obiekt, row);
+            obw.get(i).update(sposobEdycji,dane,StanowiskoPracy.class,row);
         }
 
     }
@@ -168,7 +167,6 @@ public class DodajStanowisko extends javax.swing.JFrame implements Obiekt {
         }
         else{sposobEdycji=new Dodawanie();}
 
-       obiekt= createClass.create(dane, StanowiskoPracy.class);
        notifyObservers();
        
         this.dispose();
@@ -176,7 +174,6 @@ public class DodajStanowisko extends javax.swing.JFrame implements Obiekt {
     }//GEN-LAST:event_ZapiszActionPerformed
 
     private void UsunActionPerformed(java.awt.event.ActionEvent evt) {
-        obiekt= createClass.create(dane, StanowiskoPracy.class);
         sposobEdycji= new Usuwanie();
         notifyObservers();
         this.dispose(); //GEN-FIRST:event_UsunActionPerformed

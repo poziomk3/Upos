@@ -9,12 +9,23 @@ import Hierarchia.Pracownik.PracownikAdministracyjny;
 import Hierarchia.Pracownik.PracownikNaukowy;
 import Hierarchia.Student.Student;
 import Interfejsy.DoComboBoxa;
+import javagui.Program;
 
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class funkcjonalnosc {
+    public static int znajdzIndex(String PESEL,ArrayList<Osoba> os){
+        for (int i = 0; i < os.size();i++) {
+            if (os.get(i).getPesel().equals(PESEL)) {
+                return i;
+            }
+
+        }
+        return -1;
+    }
 
 public static String[] comboBox(ArrayList<DoComboBoxa> nazwy){
     ArrayList<String> result= new ArrayList<>();
@@ -38,31 +49,42 @@ public static String[] comboBox(ArrayList<DoComboBoxa> nazwy){
 
     public static Object[][] zapelnijTabeleStudentow(ArrayList<Osoba> baza) {
         ArrayList< Object[]> wynik=new ArrayList<Object[]>() ;
+        if (baza==null)
+            return null;
 
         for (int i = 0; i < baza.size(); i++)
             if (baza.get(i) instanceof Student)
                 wynik.add(new Object[]{i, baza.get(i).getImie(), baza.get(i).getNazwisko(), baza.get(i).getPesel(), ((Student) baza.get(i)).getNrIneksu()});
-
+        if (wynik.size()==0){
+            return null;}
 
         return returnFormat(wynik);
     }
     public static Object[][] zapelnijTabeleAdministracji(ArrayList<Osoba> baza) {
         ArrayList< Object[]> wynik=new ArrayList<Object[]>() ;
-
+        if (baza==null)
+            return null;
         for (int i = 0; i < baza.size(); i++)
             if (baza.get(i) instanceof PracownikAdministracyjny)
                 wynik.add(new Object[]{i, baza.get(i).getImie(), baza.get(i).getNazwisko(), baza.get(i).getPesel(), ((PracownikAdministracyjny) baza.get(i)).getNrPracownika(), ((PracownikAdministracyjny) baza.get(i)).getStanowisko().getNazwa()});
-
+        if (wynik.size()==0){
+            return null;}
 
         return returnFormat(wynik);
     }
+    public static int getRandomNumberUsingNextInt(int min, int max) {
+        Random random = new Random();
+        return random.nextInt(max - min) + min;
+    }
     public static Object[][] zapelnijTabeleNaukowa(ArrayList<Osoba> baza) {
         ArrayList< Object[]> wynik=new ArrayList<Object[]>() ;
-
+        if (baza==null)
+            return null;
         for (int i = 0; i < baza.size(); i++)
             if (baza.get(i) instanceof PracownikNaukowy)
                 wynik.add(new Object[]{i, baza.get(i).getImie(), baza.get(i).getNazwisko(), baza.get(i).getPesel(), ((PracownikNaukowy) baza.get(i)).getNrPracownika(), ((PracownikNaukowy) baza.get(i)).getWydzial().getNazwa()});
-
+        if (wynik.size()==0){
+            return null;}
         return returnFormat(wynik);
     }
     public static Object[][] zapelnijKursy(ArrayList<Kurs> kursy) {
@@ -101,11 +123,11 @@ public static String[] comboBox(ArrayList<DoComboBoxa> nazwy){
         return returnFormat(wynik);
     }
 
-    public static Object[][] returnFormat( ArrayList< Object[]> wynik) {
+    public static <T> Object[][] returnFormat( ArrayList< T> wynik) {
         Object[][] result= new Object[wynik.size()][];
 
         for (int i = 0; i < wynik.size(); i++)
-            result[i] = wynik.get(i);
+            result[i] = (Object[]) wynik.get(i);
 
         return result;
     }

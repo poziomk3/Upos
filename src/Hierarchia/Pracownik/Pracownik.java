@@ -7,6 +7,8 @@ public abstract class Pracownik extends Osoba {
     private final String nrPracownika;
     int dniWolne;
 
+
+
     public Pracownik(String imie, String nazwisko, String pesel, String nrPracownika, int dniWolne) {
         super(imie, nazwisko, pesel);
         this.nrPracownika = nrPracownika;
