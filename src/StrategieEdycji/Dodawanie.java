@@ -4,9 +4,10 @@ import Hierarchia.ObiektyAgregowane.Kurs;
 import Hierarchia.ObiektyAgregowane.StanowiskoPracy;
 import Hierarchia.ObiektyAgregowane.Wydzial;
 import Hierarchia.Osoba;
-import Main.WyjatekElementuzBazy;
-import javagui.Program;
-import javagui.SprawdzeniePriorytetu;
+import Biblioteki.WyjatekElementuzBazy;
+import Interfejsy.Edycja;
+import Program.Program;
+import Biblioteki.SprawdzeniePriorytetu;
 
 import java.util.ArrayList;
 
@@ -14,14 +15,16 @@ public class Dodawanie implements Edycja {
 
     @Override
     public ArrayList<?> operacja(ArrayList<?> ArrayList, Object [] dane, Class klasa, int wiersz) {
-        Object obiekt=Main.createClass.create(dane,klasa);
+        Object obiekt= Biblioteki.createClass.create(dane,klasa);
+
+
         if (obiekt == null) {
             Program.Glowne.alert("NIE DODANO, ZLY FORMAT,SPROBUJ PONOWNIE");
             return ArrayList;
         }
         if (obiekt instanceof  Osoba) {
             try {
-                SprawdzeniePriorytetu.pesel(((Osoba) obiekt).getPesel());
+                SprawdzeniePriorytetu.CzyMoznaUstawicPesel(((Osoba) obiekt).getPesel());
             } catch (WyjatekElementuzBazy e) {
             Program.Glowne.alert("PESEL JUZ W BAZIE! SPROBUJ PONOWNIE!");
                 return ArrayList;
@@ -29,14 +32,14 @@ public class Dodawanie implements Edycja {
         }
 
 
-        ArrayList<Osoba> os=new ArrayList<Osoba>();
+        ArrayList<Osoba> os= new ArrayList<>();
         if (ArrayList.getClass()==os.getClass()&& obiekt instanceof Osoba ) {
             os=(ArrayList<Osoba>)ArrayList;
             os.add((Osoba)obiekt);
             return os;
         }
 
-        ArrayList<Kurs> kursy=new ArrayList<Kurs>();
+        ArrayList<Kurs> kursy;
         if (ArrayList.getClass()==os.getClass()&& obiekt instanceof Kurs ) {
             kursy=(ArrayList<Kurs>)ArrayList;
             kursy.add((Kurs)obiekt);
@@ -44,14 +47,14 @@ public class Dodawanie implements Edycja {
         }
 
 
-        ArrayList<StanowiskoPracy> stanowiska=new ArrayList<StanowiskoPracy>();
+        ArrayList<StanowiskoPracy> stanowiska;
         if (ArrayList.getClass()==os.getClass()&& obiekt instanceof StanowiskoPracy ) {
             stanowiska=(ArrayList<StanowiskoPracy>)ArrayList;
             stanowiska.add((StanowiskoPracy) obiekt);
             return stanowiska;
         }
 
-        ArrayList<Wydzial> wydzialy=new ArrayList<Wydzial>();
+        ArrayList<Wydzial> wydzialy;
         if (ArrayList.getClass()==os.getClass()&& obiekt instanceof Wydzial ) {
             wydzialy=(ArrayList<Wydzial>)ArrayList;
             wydzialy.add((Wydzial) obiekt);

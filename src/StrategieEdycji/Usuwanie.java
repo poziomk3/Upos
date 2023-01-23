@@ -2,9 +2,10 @@ package StrategieEdycji;
 
 import Hierarchia.ObiektyAgregowane.StanowiskoPracy;
 import Hierarchia.ObiektyAgregowane.Wydzial;
-import Main.WyjatekElementuzBazy;
-import javagui.Program;
-import javagui.SprawdzeniePriorytetu;
+import Biblioteki.WyjatekElementuzBazy;
+import Interfejsy.Edycja;
+import Program.Program;
+import Biblioteki.SprawdzeniePriorytetu;
 import java.util.ArrayList;
 
 

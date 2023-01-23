@@ -4,16 +4,17 @@ import Hierarchia.ObiektyAgregowane.Kurs;
 import Hierarchia.ObiektyAgregowane.StanowiskoPracy;
 import Hierarchia.ObiektyAgregowane.Wydzial;
 import Hierarchia.Osoba;
-import Main.WyjatekElementuzBazy;
-import javagui.Program;
-import javagui.SprawdzeniePriorytetu;
+import Biblioteki.WyjatekElementuzBazy;
+import Interfejsy.Edycja;
+import Program.Program;
+import Biblioteki.SprawdzeniePriorytetu;
 
 import java.util.ArrayList;
 
 public class Nadpisywanie implements Edycja {
     @Override
     public ArrayList<?> operacja(ArrayList<?> ArrayList, Object [] dane, Class klasa, int wiersz) {
-        Object obiekt=Main.createClass.create(dane,klasa);
+        Object obiekt= Biblioteki.createClass.create(dane,klasa);
         if (obiekt == null) {
             return ArrayList;
         }
@@ -23,6 +24,7 @@ public class Nadpisywanie implements Edycja {
             os.set(wiersz, (Osoba) obiekt);
             return os;
         }
+
 
         ArrayList<Kurs> kursy;
         if ( obiekt instanceof Kurs ) {

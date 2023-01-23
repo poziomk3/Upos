@@ -5,7 +5,7 @@ import Hierarchia.Osoba;
 
 public abstract class Pracownik extends Osoba {
     private final String nrPracownika;
-    int dniWolne;
+    private int dniWolne;
 
 
 
